@@ -1,11 +1,12 @@
 
 package frc4940.rr2014.main;
-
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.RobotDrive;
 
 public class Robot extends IterativeRobot {
 	XtremePro joystick = new XtremePro();
 	Talons motors = new Talons();
+	RobotDrive chassis = new RobotDrive(motors.Bae4, motors.Bae3, motors.Bae1, motors.Bae2);
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
@@ -20,23 +21,28 @@ public class Robot extends IterativeRobot {
     public void autonomousPeriodic() {
     	motors.setBae1(0.4);
     }
-
     /**
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
-    	if(joystick.getTwist()>= 0.1 || joystick.getTwist()<= -0.1){
-    		motors.setBae1(joystick.getTwist());
+    	
+    	final int GyroAngle = 0;
+    	//moves motor bases on twist
+    	/*if(joystick.getTwist()>= 0.1 || joystick.getTwist()<= -0.1){
+    		//motors.setBae1(joystick.getTwist());
     	}
-    	if(joystick.getYAxis()>= 0.1 || joystick.getYAxis()<= -0.1){
-    		motors.setBae1(joystick.getYAxis());
+    	//moves 
+    	if(joystick.getYAxis() >= 0.1 || joystick.getYAxis()<= -0.1){
+    		//motors.setBae1(joystick.getYAxis());
     	}
-    	if((joystick.getYAxis()<= 0.1 || joystick.getYAxis()>= -0.1)||(joystick.getTwist()<= 0.1 || joystick.getTwist()>= -0.1)){
+    	if((joystick.getYAxis()<= 0.1 && joystick.getYAxis()>= -0.1)&&(joystick.getTwist()<= 0.1 && joystick.getTwist()>= -0.1)){
     		motors.setBae1(0);
     	}
     	if(joystick.getTrigger()){
     		motors.setBae1(0.5);
-    	}
+    	}*/
+    	
+    	chassis.mecanumDrive_Cartesian(joystick.getXAxis() , joystick.getYAxis(), joystick.getTwist(), GyroAngle);
     	
     }
     
