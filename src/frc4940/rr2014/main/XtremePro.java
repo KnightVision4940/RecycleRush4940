@@ -7,17 +7,17 @@ public class XtremePro {
 	double getXAxis(){
 		return controller.getX();
 	}
-	double getyAxis(){ 
-       return controller.getY();
-    
+	double getYAxis(){ 
+		return controller.getY();
     }
-	double getzAxis(){
+	double getZAxis(){
     	return controller.getZ();
-    	
+	}
+	double getTwist(){
+		return controller.getTwist();
 	}
 	boolean getTrigger(){
 		return controller.getRawButton(1);
-		
 	}
 	boolean getThumb(){
 		return controller.getRawButton(2);
