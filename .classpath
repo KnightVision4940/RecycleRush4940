@@ -6,5 +6,9 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
 	<classpathentry kind="lib" path="lib/NetworkTables.jar"/>
 	<classpathentry kind="lib" path="lib/WPILib.jar"/>
+	<classpathentry kind="lib" path="jaw/NetworkTables-sources.jar"/>
+	<classpathentry kind="lib" path="jaw/NetworkTables.jar"/>
+	<classpathentry kind="lib" path="jaw/WPILib-sources.jar"/>
+	<classpathentry kind="lib" path="jaw/WPILib.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

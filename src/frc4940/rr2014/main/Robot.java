@@ -8,7 +8,7 @@ public class Robot extends IterativeRobot {
 	Talons motors = new Talons();
 	RobotDrive chassis = new RobotDrive(motors.Bae4, motors.Bae3, motors.Bae1, motors.Bae2);
 	final int NULL = 0;
-    
+    XboxController xbox=new XboxController();
 	/**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
@@ -54,7 +54,7 @@ public class Robot extends IterativeRobot {
     			chassis.mecanumDrive_Cartesian(joystick.getXAxis() , joystick.getYAxis(), NULL, NULL); //drives only, no rotation
     		}
     	}
-    	
+    motors.setBae1(xbox.getLeftX());
     }
     
     /**
