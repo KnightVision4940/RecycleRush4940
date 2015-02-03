@@ -45,7 +45,7 @@ public class Robot extends IterativeRobot {
     	
     	//checks if the joystick is in the dead zone. If so, the motors are stopped. Else, the motors work bases on the input
     	if(((-0.1 <= joystick.getXAxis()) && (joystick.getXAxis() <= 0.1)) || ((-0.1 <= joystick.getYAxis()) && (joystick.getYAxis() <= 0.1))){
-    		chassis.mecanumDrive_Cartesian(0, 0, 0, 0);
+    		chassis.mecanumDrive_Cartesian(NULL, NULL, NULL, NULL);
     	} else {
     		//checks if trigger is held, and uses twist rotation if true
     		if(joystick.getTrigger()){
