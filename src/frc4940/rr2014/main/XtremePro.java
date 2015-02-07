@@ -5,10 +5,10 @@ import edu.wpi.first.wpilibj.Joystick;
 public class XtremePro {
 	Joystick controller = new Joystick (0);
 	double getXAxis(){
-		return controller.getX();
+		return controller.getRawAxis(1);
 	}
 	double getYAxis(){ 
-		return controller.getY();
+		return controller.getRawAxis(2);
     }
 	double getZAxis(){
     	return controller.getZ();
