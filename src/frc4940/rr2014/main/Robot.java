@@ -6,7 +6,7 @@ public class Robot extends IterativeRobot {
 	//Declares the Subsystems and other global variables
 	XtremePro joystick = new XtremePro();
 	Drivetrain drivetrain = new Drivetrain();
-	RobotDrive drive = new RobotDrive(drivetrain.Bae4, drivetrain.Bae3, drivetrain.Bae1, drivetrain.Bae2);
+	RobotDrive drive = new RobotDrive(drivetrain.LFront, drivetrain.LBack, drivetrain.RFront, drivetrain.RBack);
 	final int NULL = 0;
     XboxController xbox=new XboxController();
 	/**
@@ -21,31 +21,22 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during autonomous
      */
     public void autonomousPeriodic() {
-    	drivetrain.setBae1(0.5);
-    	drivetrain.setBae2(0.5);
-    	drivetrain.setBae3(0.5);
-    	drivetrain.setBae4(0.5);
+    	drivetrain.setRFront(0.5);
+    	drivetrain.setRBack(0.5);
+    	drivetrain.setLFront(0.5);
+    	drivetrain.setLBack(0.5);
     }
     /**
      * This function is called periodically during operator control
      */
     public void teleopInit(){
     	//Disables Safety for the Robots
-    	drivetrain.Bae1.setSafetyEnabled(false);
-    	drivetrain.Bae2.setSafetyEnabled(false);
-    	drivetrain.Bae3.setSafetyEnabled(false);
-    	drivetrain.Bae4.setSafetyEnabled(false);
+    	drivetrain.RFront.setSafetyEnabled(false);
+    	drivetrain.RBack.setSafetyEnabled(false);
+    	drivetrain.LFront.setSafetyEnabled(false);
+    	drivetrain.LBack.setSafetyEnabled(false);
     }
     public void teleopPeriodic() {
-    	
-    	if(xbox.getAButton()){
-    		drivetrain.setBae1(0.5);
-    	} else {
-    		drivetrain.setBae1(0);
-    	}
-    	
-    	drivetrain.setBae1(joystick.getYAxis());
-    	drivetrain.setBae1(xbox.getLeftY());
     	
     	//FRONT ELEVATOR
     	if(xbox.getAButton()){
@@ -67,7 +58,7 @@ public class Robot extends IterativeRobot {
     		if(xbox.getLTrig() >= 0.1){
     			//Raises the Back elevator
     		}
-    	}
+    	} 
     	
     	//checks if the joystick is in the dead zone. If so, the drive are stopped. Else, the drive work bases on the input
     	if(((-0.1 <= joystick.getXAxis()) && (joystick.getXAxis() <= 0.1)) || ((-0.1 <= joystick.getYAxis()) && (joystick.getYAxis() <= 0.1))){
