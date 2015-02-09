@@ -6,6 +6,7 @@ public class Robot extends IterativeRobot {
 	//Declares the Subsystems and other global variables
 	XtremePro joystick = new XtremePro();
 	Drivetrain drivetrain = new Drivetrain();
+	Elevator elev = new Elevator();
 	RobotDrive drive = new RobotDrive(drivetrain.LFront, drivetrain.LBack, drivetrain.RFront, drivetrain.RBack);
 	final int NULL = 0;
     XboxController xbox=new XboxController();
@@ -31,23 +32,32 @@ public class Robot extends IterativeRobot {
      */
     public void teleopInit(){
     	//Disables Safety for the Robots
-    	drivetrain.RFront.setSafetyEnabled(false);
-    	drivetrain.RBack.setSafetyEnabled(false);
-    	drivetrain.LFront.setSafetyEnabled(false);
-    	drivetrain.LBack.setSafetyEnabled(false);
+    	//drivetrain.RFront.setSafetyEnabled(true);
+    	//drivetrain.RBack.setSafetyEnabled(true);
+    	//drivetrain.LFront.setSafetyEnabled(true);
+    	//drivetrain.LBack.setSafetyEnabled(true);
     }
     public void teleopPeriodic() {
     	
     	//FRONT ELEVATOR
     	if(xbox.getAButton()){
     		if(xbox.getRTrig() >= 0.1){
-    			//Lowers the Front elevator
+    			//lowers front elevator
+    			elev.setShortElev(-1 * xbox.getRTrig());
     		}
     	} else {
     		if(xbox.getRTrig() >= 0.1){
-    			//Raises the Front elevator
+    			//raises front elevator
+    			elev.setShortElev(xbox.getRTrig());
     		}
-    	}
+    	} 
+    	
+    	if(xbox.getRTrig() < 0.1)
+    	{
+			//raises front elevator
+			elev.setShortElev(0.0);
+    	}							
+    	
     	
     	//BACK ELEVATOR
     	if(xbox.getXButton()){
