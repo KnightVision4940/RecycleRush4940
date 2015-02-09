@@ -1,4 +1,5 @@
 package frc4940.rr2014.main;
+
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.RobotDrive;
 
@@ -10,6 +11,8 @@ public class Robot extends IterativeRobot {
 	final int NULL = 0;
     XboxController xbox=new XboxController();
 	/**
+	Talons motors = new Talons();
+    /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
      */
@@ -21,44 +24,39 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during autonomous
      */
     public void autonomousPeriodic() {
-    	drivetrain.setRFront(0.5);
-    	drivetrain.setRBack(0.5);
-    	drivetrain.setLFront(0.5);
-    	drivetrain.setLBack(0.5);
+    	drive.setSafetyEnabled(false);
+
+    	drive.drive(1, 0);
     }
+
     /**
      * This function is called periodically during operator control
      */
     public void teleopInit(){
+    	drive.setSafetyEnabled(false);
+    	/*
     	//Disables Safety for the Robots
     	drivetrain.RFront.setSafetyEnabled(false);
     	drivetrain.RBack.setSafetyEnabled(false);
     	drivetrain.LFront.setSafetyEnabled(false);
     	drivetrain.LBack.setSafetyEnabled(false);
+    	*/
     }
     public void teleopPeriodic() {
-    	
-    	//FRONT ELEVATOR
-    	if(xbox.getAButton()){
-    		if(xbox.getRTrig() >= 0.1){
-    			//Lowers the Front elevator
-    		}
-    	} else {
-    		if(xbox.getRTrig() >= 0.1){
-    			//Raises the Front elevator
-    		}
+    	/*
+    	if(joystick.getTwist()>= 0.1 || joystick.getTwist()<= -0.1){
+    		motors.setBae1(joystick.getTwist());
     	}
-    	
-    	//BACK ELEVATOR
-    	if(xbox.getXButton()){
-    		if(xbox.getLTrig() >= 0.1){
-    			//Lowers the back elevator
-    		}
-    	} else {
-    		if(xbox.getLTrig() >= 0.1){
-    			//Raises the Back elevator
-    		}
-    	} 
+    	if(joystick.getYAxis()>= 0.1 || joystick.getYAxis()<= -0.1){
+    		motors.setBae1(joystick.getYAxis());
+    	}
+    	if((joystick.getYAxis()<= 0.1 || joystick.getYAxis()>= -0.1)||(joystick.getTwist()<= 0.1 || joystick.getTwist()>= -0.1)){
+    		motors.setBae1(0);
+    	}
+    	if(joystick.getTrigger()){
+    		motors.setBae1(0.5);
+    	}
+    	*/
     	
     	//checks if the joystick is in the dead zone. If so, the drive are stopped. Else, the drive work bases on the input
     	if(((-0.1 <= joystick.getXAxis()) && (joystick.getXAxis() <= 0.1)) || ((-0.1 <= joystick.getYAxis()) && (joystick.getYAxis() <= 0.1))){
