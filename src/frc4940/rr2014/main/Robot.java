@@ -1,5 +1,6 @@
 package frc4940.rr2014.main;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.RobotDrive;
 
 public class Robot extends IterativeRobot {
@@ -14,7 +15,7 @@ public class Robot extends IterativeRobot {
     
     //CONSTANTS
     final double OFFSET = 0.1;
-	final int NULL = 0;
+	final double NULL = 0.0;
 	final double DEADZONE = 0.1;
 	final int AUTONOMOUS_MODE = 1;
 	
@@ -33,7 +34,9 @@ public class Robot extends IterativeRobot {
      */
     public void autonomousPeriodic() {
     	if(AUTONOMOUS_MODE == 1){ //Drives Forwards
-    		
+    		drive.mecanumDrive_Cartesian(0.25, NULL, NULL, NULL);
+    		Timer.delay(5);
+    		drive.mecanumDrive_Cartesian(NULL, NULL, NULL, NULL);
     	}
     	
     }
@@ -74,48 +77,50 @@ public class Robot extends IterativeRobot {
     	if(xbox.getAButton()) tallElev.set(0.3);
     	else if (xbox.getBButton()) tallElev.set(-0.5);
     	else tallElev.set(-OFFSET);
-    	//Controls the short elevator
-    	if(xbox.getXButton()) shortElev.set(-0.5);
-    	else if (xbox.getYButton()) shortElev.set(0.5);
-    	else shortElev.set(0);
-    	//Closes the gripper, L Bumper
-    	if(xbox.getLBButton()){
-    		gripper.set(-1);
-    	} else if(xbox.getRBButton()){
-    		gripper.set(1);
-    	} else {
-    		gripper.set(0);
+    	
+    	
+    	if(xbox.getAButton()){
+    		if(!tallElev.getLowerLimit()){
+    			tallElev.set(-OFFSET);
+    		}
+    		else {
+    			tallElev.set(0.3); //Goes Down
+    		}
+    	}
+    	else if(xbox.getYButton()){
+    		if(!tallElev.getUpperLimit()){
+    			tallElev.set(-OFFSET);
+    		}
+    		else {
+    			tallElev.set(-0.5); //Goes Up
+    		}
+    	}
+    	else{
+    		tallElev.set(-OFFSET);
     	}
     	
-    	//INSERT CODE FOR WHEELS
+    	//Controls the short elevator, X and Y Buttons
+    	if(xbox.getXButton()){
+    		if(!shortElev.getLowerLimit()){
+    			shortElev.set(0);
+    		}
+    		else {
+    			shortElev.set(-0.5); //Goes Down
+    		}
+    	}
+    	else if(xbox.getYButton()){
+    		if(!shortElev.getUpperLimit()){
+    			shortElev.set(0);
+    		}
+    		else {
+    			shortElev.set(0.5); //Goes Up
+    		}
+    	}
+    	else{
+    		shortElev.set(0);
+    	}
     	
-    }
-    
-    /**
-     * This function is called periodically during test mode
-     */
-    public void testPeriodic() {
-    	/*
-    	if(shortElev.getUpperLimit()) shortElev.set(0.5);
-    	else if (shortElev.getLowerLimit()) shortElev.set(-0.5);
-    	else shortElev.set(0);
-    	
-    	if(tallElev.getUpperLimit()) tallElev.set(-0.4);
-    	else if (tallElev.getLowerLimit()) tallElev.set(0.2);
-    	else tallElev.set(-OFFSET);
-    	
-    	if(gripper.getClosedLimit()) gripper.set(1);
-    	else if (gripper.getOpenLimit()) gripper.set(-1);
-    	else gripper.set(0);
-    	*/
-    	/*
-    	if(!gripper.closedLimit.get()){
-    		gripper.set(1);
-    	} else if (!gripper.openLimit.get()){
-    		gripper.set(-1);
-    	} else gripper.set(0);
-    	*/
-    	
+    	//Closes the gripper, Bumpers
     	if(xbox.getLBButton()){
     		if(!gripper.getClosedLimit()){
     			gripper.set(0);
@@ -136,146 +141,33 @@ public class Robot extends IterativeRobot {
     		gripper.set(0);
     	}
     	
-    	/*
-    	if(gripper.getClosedLimit()){
-    		if(xbox.getLBButton()) gripper.set(-1);
-    		else gripper.set(0);
-    	} else if(gripper.getOpenLimit()){
-    		if(xbox.getRBButton())gripper.set(1);
-    		else gripper.set(0);
-    	} else if(!gripper.getOpenLimit() && !gripper.getClosedLimit()){
-    		gripper.set(0);
-    	}*/
+    	//INSERT CODE FOR WHEELS
     	
-    	drive.mecanumDrive_Cartesian(joystick.getXAxis(), joystick.getYAxis(), NULL, NULL);
+    }
+    
+    /**
+     * This function is called periodically during test mode
+     */
+    public void testPeriodic() {
+    	/**
+    	 * DIFFERENT DRIVE METHODS. 
+    	 * UNCOMMENT ONE COMMENT BLOCK AT A TIME
+    	 * TO TEST THEM OUT
+    	 * REMEMBER TO COMMENT IT BACK AGAIN WHEN CHANGING METHODS
+    	 */
     	
-    	//drive.mecanumDrive_Cartesian(0.5 * xbox.getLeftX_movePad(),  0.5 * xbox.getLeftY_movePad(), 0.5 * xbox.getRightX_movePad(), NULL);
-    	/*
-    	if(xbox.getAButton_movePad()){
-    		drivetrain.RFront.set(1);
-    		drivetrain.RBack.set(1);
-    		drivetrain.LFront.set(1);
-    		drivetrain.LBack.set(1);
-    	}
-    	else if(xbox.getBButton_movePad()){
-    		drivetrain.RFront.set(-1);
-    		drivetrain.RBack.set(-1);
-    		drivetrain.LFront.set(-1);
-    		drivetrain.LBack.set(-1);
-    	}
-    	else{
-    		drivetrain.RFront.set(0);
-    		drivetrain.RBack.set(0);
-    		drivetrain.LFront.set(0);
-    		drivetrain.LBack.set(0);
-    	}*/
-    	/*
-    	drivetrain.RFront.set(joystick.getXAxis());
-    	drivetrain.RBack.set(joystick.getXAxis());
-    	drivetrain.LFront.set(joystick.getXAxis());
-    	drivetrain.LBack.set(joystick.getXAxis());
-    	*/
+    	//drive.mecanumDrive_Cartesian(joystick.getXAxis(), joystick.getYAxis(), joystick.getTwist(), NULL);
     	
-    	/*
-    	if(xbox.getAButton_movePad()){
-    		drivetrain.RBack.set(-1);
-    	} 
-    	else if
-    		{
-        		drivetrain.RBack.set(1);
-        	} 
-    		else {
-        		drivetrain.RBack.set(0);
-        	}
-    	}
-    	if(xbox.getBButton_movePad()){
-    		drivetrain.RFront.set(-1);
-    	} else {
-    		drivetrain.RFront.set(0);
-    	}
-    	if(xbox.getXButton_movePad()){
-    		drivetrain.LBack.set(1);
-    	} else {
-    		drivetrain.LBack.set(0);
-    	}
-    	if(xbox.getYButton_movePad()){
-    		drivetrain.LFront.set(1);
-    	} else {
-    		drivetrain.LFront.set(0);
-    	}
+    	//drive.mecanumDrive_Cartesian(joystick.getYAxis(), joystick.getXAxis(), joystick.getTwist(), NULL);
     	
+    	//drive.mecanumDrive_Cartesian(xbox.getLeftX(), xbox.getLeftY(), xbox.getRightX, NULL);
     	
-    	if(xbox.getBButton()){
-    		drivetrain.RFront.set(1);
-    	} else {
-    		drivetrain.RFront.set(0);
-    	}
-    	if(xbox.getXButton()){
-    		drivetrain.LBack.set(-1);
-    	} else {
-    		drivetrain.LBack.set(0);
-    	}
-    	if(xbox.getYButton()){
-    		drivetrain.LFront.set(-1);
-    	} else {
-    		drivetrain.LFront.set(0);
-    	}
+    	//drive.mecanumDrive_Cartesian(xbox.getLeftY(), xbox.getLeftX(), xbox.getRightX, NULL);
     	
-    	//JOYSTICKS
-    	if(xbox.getRightX_movePad() > DEADZONE){
-    		drivetrain.RBack.set(-1);
-    	} else {
-    		drivetrain.RBack.set(0);
-    	}
-    	if(xbox.getBButton_movePad()){
-    		drivetrain.RFront.set(-1);
-    	} else {
-    		drivetrain.RFront.set(0);
-    	}
-    	if(xbox.getXButton_movePad()){
-    		drivetrain.LBack.set(1);
-    	} else {
-    		drivetrain.LBack.set(0);
-    	}
-    	if(xbox.getYButton_movePad()){
-    		drivetrain.LFront.set(1);
-    	} else {
-    		drivetrain.LFront.set(0);
-    	}
+    	//drive.mecanumDrive_Cartesian(joystick.getZAxis(), joystick.getYAxis(), joystick.getTwist(), NULL);
     	
-    	if(xbox.getAButton()) drivetrain.RBack.set(-1);
-    	else if(xbox.getAButton_movePad()) drivetrain.RBack.set(1);
-    	else drivetrain.RBack.set(0);
+    	//drive.mecanumDrive_Cartesian(joystick.getYAxis(), joystick.getZAxis(), joystick.getTwist(), NULL);
     	
-    	if(xbox.getBButton()) drivetrain.RFront.set(-1);
-    	else if(xbox.getBButton_movePad()) drivetrain.RFront.set(1);
-    	else drivetrain.RFront.set(0);
-    	
-    	if(xbox.getXButton()) drivetrain.LBack.set(1);
-    	else if(xbox.getXButton_movePad()) drivetrain.LBack.set(-1);
-    	else drivetrain.LBack.set(0);
-    	
-    	if(xbox.getYButton()) drivetrain.LFront.set(1);
-    	else if(xbox.getYButton_movePad()) drivetrain.LFront.set(-1);
-    	else drivetrain.LFront.set(0);
-    	
-    	
-    	if(xbox.getRightY() < DEADZONE) drivetrain.RBack.set(-1);
-    	else if(xbox.getAButton_movePad()) drivetrain.RBack.set(1);
-    	else drivetrain.RBack.set(0);
-    	
-    	if(xbox.getBButton()) drivetrain.RFront.set(-1);
-    	else if(xbox.getBButton_movePad()) drivetrain.RFront.set(1);
-    	else drivetrain.RFront.set(0);
-    	
-    	if(xbox.getXButton()) drivetrain.LBack.set(1);
-    	else if(xbox.getXButton_movePad()) drivetrain.LBack.set(-1);
-    	else drivetrain.LBack.set(0);
-    	
-    	if(xbox.getYButton()) drivetrain.LFront.set(1);
-    	else if(xbox.getYButton_movePad()) drivetrain.LFront.set(-1);
-    	else drivetrain.LFront.set(0);
-    	*/
     }
     
 }
