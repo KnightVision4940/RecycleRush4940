@@ -16,6 +16,7 @@ public class Robot extends IterativeRobot {
     final double OFFSET = 0.1;
 	final int NULL = 0;
 	final double DEADZONE = 0.1;
+	final int AUTONOMOUS_MODE = 1;
 	/**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
@@ -29,7 +30,12 @@ public class Robot extends IterativeRobot {
     /**
      * This function is called periodically during autonomous
      */
-    public void autonomousPeriodic() {}
+    public void autonomousPeriodic() {
+    	if(AUTONOMOUS_MODE == 1){ //Drives Forwards
+    		
+    	}
+    	
+    }
     
     /**
      * This function is called periodically during operator control
@@ -49,15 +55,15 @@ public class Robot extends IterativeRobot {
     	 */
     	//drives the robot using mecanum wheels and joysticks
     	//if((xbox.getLeftX_movePad() > DEADZONE || xbox.getLeftX_movePad() < -DEADZONE) || (xbox.getLeftY_movePad() > DEADZONE || xbox.getLeftY_movePad() < -DEADZONE)){
-    		drive.mecanumDrive_Cartesian(NULL, xbox.getLeftY_movePad(), NULL, NULL);
+    	drive.mecanumDrive_Cartesian(0.5 * joystick.getXAxis(), 0.5 * joystick.getYAxis(), NULL, NULL);
     	//} else drive.mecanumDrive_Cartesian(NULL,NULL,NULL,NULL);
     	//Right bumper, rotates right
     	if(xbox.getRBButton_movePad()){
-    		drive.mecanumDrive_Cartesian(NULL, NULL, 0.4, NULL);
+    		drive.mecanumDrive_Cartesian(NULL, NULL, 1.0, NULL);
     	}
     	//Left bumper, rotates left
     	if(xbox.getLBButton_movePad()){
-    		drive.mecanumDrive_Cartesian(NULL, NULL, -0.4, NULL);
+    		drive.mecanumDrive_Cartesian(NULL, NULL, -1.0, NULL);
     	}
     	
     	/**
@@ -68,19 +74,13 @@ public class Robot extends IterativeRobot {
     	else if (xbox.getBButton()) tallElev.set(-0.5);
     	else tallElev.set(-OFFSET);
     	//Controls the short elevator
-    	if(xbox.getRightY() > DEADZONE || xbox.getRightY() < -DEADZONE){
-    		shortElev.set(xbox.getRightY());
-    	} else {
-    		shortElev.set(0);
-    	}
+    	if(xbox.getXButton()) shortElev.set(-0.5);
+    	else if (xbox.getYButton()) shortElev.set(0.5);
+    	else shortElev.set(0);
     	//Closes the gripper, L Bumper
     	if(xbox.getLBButton()){
     		gripper.set(-1);
-    	} else {
-    		gripper.set(0);
-    	}
-    	//Opens the gripper, R Bumper
-    	if(xbox.getRBButton()){
+    	} else if(xbox.getRBButton()){
     		gripper.set(1);
     	} else {
     		gripper.set(0);
@@ -158,18 +158,60 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during test mode
      */
     public void testPeriodic() {
-    	
+    	/*
     	if(shortElev.getUpperLimit()) shortElev.set(0.5);
     	else if (shortElev.getLowerLimit()) shortElev.set(-0.5);
     	else shortElev.set(0);
     	
     	if(tallElev.getUpperLimit()) tallElev.set(-0.4);
     	else if (tallElev.getLowerLimit()) tallElev.set(0.2);
-    	else tallElev.set(OFFSET);
+    	else tallElev.set(-OFFSET);
     	
     	if(gripper.getClosedLimit()) gripper.set(1);
     	else if (gripper.getOpenLimit()) gripper.set(-1);
     	else gripper.set(0);
+    	*/
+    	/*
+    	if(!gripper.closedLimit.get()){
+    		gripper.set(1);
+    	} else if (!gripper.openLimit.get()){
+    		gripper.set(-1);
+    	} else gripper.set(0);
+    	*/
+    	
+    	if(xbox.getLBButton()){
+    		if(!gripper.getClosedLimit()){
+    			gripper.set(0);
+    		}
+    		else {
+    			gripper.set(-1);
+    		}
+    	}
+    	else if(xbox.getRBButton()){
+    		if(!gripper.getOpenLimit()){
+    			gripper.set(0);
+    		}
+    		else {
+    			gripper.set(1);
+    		}
+    	}
+    	else{
+    		gripper.set(0);
+    	}
+    	
+    	/*
+    	if(gripper.getClosedLimit()){
+    		if(xbox.getLBButton()) gripper.set(-1);
+    		else gripper.set(0);
+    	} else if(gripper.getOpenLimit()){
+    		if(xbox.getRBButton())gripper.set(1);
+    		else gripper.set(0);
+    	} else if(!gripper.getOpenLimit() && !gripper.getClosedLimit()){
+    		gripper.set(0);
+    	}*/
+    	
+    	drive.mecanumDrive_Cartesian(joystick.getXAxis(), joystick.getYAxis(), NULL, NULL);
+    	
     	//drive.mecanumDrive_Cartesian(0.5 * xbox.getLeftX_movePad(),  0.5 * xbox.getLeftY_movePad(), 0.5 * xbox.getRightX_movePad(), NULL);
     	/*
     	if(xbox.getAButton_movePad()){

@@ -1,0 +1,10 @@
+AUTONOMOUS MODES
+DIRECTORY
+
+Change the value of 
+	final int AUTONOMOUS_MODE
+in Robot.java in order to select the Autonomous modes
+
+
+--  1  --
+	Drive Forwards 

@@ -3,7 +3,7 @@ import edu.wpi.first.wpilibj.Joystick;
 public class XboxController {
 	
 	
-	Joystick xbox = new Joystick(0);         //Wireless Controller
+	Joystick xbox = new Joystick(2);         //Wireless Controller
 	Joystick xbox_movePad = new Joystick(1); //Wired Controller
 	
 	/**
@@ -15,6 +15,9 @@ public class XboxController {
 	}
 	double getLeftY_movePad(){
 		return -1 * xbox_movePad.getRawAxis(2);
+	}
+	double getTrig_movePad(){
+		return -1 * xbox_movePad.getRawAxis(3);
 	}
 	double getRightX_movePad(){
 		return xbox_movePad.getRawAxis(4);
