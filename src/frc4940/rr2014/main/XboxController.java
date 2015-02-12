@@ -1,8 +1,6 @@
 package frc4940.rr2014.main;
 import edu.wpi.first.wpilibj.Joystick;
 public class XboxController {
-	
-	
 	Joystick xbox = new Joystick(2);         //Wireless Controller
 	Joystick xbox_movePad = new Joystick(1); //Wired Controller
 	

@@ -17,6 +17,7 @@ public class Robot extends IterativeRobot {
 	final int NULL = 0;
 	final double DEADZONE = 0.1;
 	final int AUTONOMOUS_MODE = 1;
+	
 	/**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
@@ -88,70 +89,6 @@ public class Robot extends IterativeRobot {
     	
     	//INSERT CODE FOR WHEELS
     	
-    	/**
-    	 * SCRAP CODE
-    	 * EXPERIMENTATION
-    	 * ALL COMMENTED OUT
-    	 */
-    	/*
-    	if(xbox.getAButton()){
-    		elev.set(0.75);
-    	} 
-    	
-    	if(xbox.getXButton()){
-    		elev.set(-0.75);
-    	}
-    	
-    	if(!xbox.getXButton() && !xbox.getAButton()){
-        		elev.set(0.0);  //lower limit
-    	}
-    	
-    	
-    	if(xbox.getBButton()){
-    		rearelev.setLongElev(0.2);
-    	}
-    	if(xbox.getYButton()){
-    		rearelev.setLongElev(-0.5);
-    	}
-    	if(!xbox.getBButton() && !xbox.getYButton()) {
-    		rearelev.setLongElev(REAR_ELEV_HOLDING_VALUE);
-	}
-    	/*
-    	if(xbox.getXButton()){
-    		drivetrain.LBack.set(0.75);
-    	} else {
-    		drivetrain.LBack.set(0.0);
-	}
-    	if(xbox.getYButton()){
-    		drivetrain.LFront.set(0.75);
-    	} else {
-    		drivetrain.LFront.set(0.0);
-	}*/
-    	/*
-    	if(xbox.getLBButton()){
-    		RearGripper.setGripper(1);
-    	}
-    	if(xbox.getRBButton()){
-    		RearGripper.setGripper(-1);
-    	}
-    	if(!xbox.getLBButton() && !xbox.getRBButton()){
-    		RearGripper.setGripper(0.0);
-    	}
-    	//checks if the joystick is in the dead zone. If so, the drive are stopped. Else,
-    	//the drive work bases on the input
-    	/*
-    	if(((-0.1 <= joystick.getXAxis()) && (joystick.getXAxis() <= 0.1)) || ((-0.1 <= joystick.getYAxis()) && (joystick.getYAxis() <= 0.1))){
-    		drive.mecanumDrive_Cartesian(0, 0, 0, 0);
-    	} else {
-    		//checks if trigger is held, and uses twist rotation if true
-    		if(joystick.getTrigger()){
-    			drive.mecanumDrive_Cartesian(joystick.getXAxis() , joystick.getYAxis(), joystick.getTwist(), NULL); //drives and rotates
-    		} else {
-    			drive.mecanumDrive_Cartesian(joystick.getXAxis() , joystick.getYAxis(), NULL, NULL); //drives only, no rotation
-    		}
-    	}
-    	*/
-    	//drivetrain.setBae1(xbox.getLeftX());
     }
     
     /**
