@@ -4,10 +4,10 @@ import edu.wpi.first.wpilibj.Talon;
 
 
 public class Drivetrain {
-	Talon RFront = new Talon(0);
-	Talon RBack = new Talon(1); 
-	Talon LBack = new Talon(2);
-	Talon LFront = new Talon(3);
+	public Talon RFront = new Talon(0);
+	public Talon RBack = new Talon(1); 
+	public Talon LBack = new Talon(2);
+	public Talon LFront = new Talon(3);
 	
 	void setRFront(double speed){
 		RFront.set(speed);

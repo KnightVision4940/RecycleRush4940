@@ -81,4 +81,10 @@ public class XboxController {
 	boolean getLBButton(){
     	return xbox.getRawButton(5);
 	}
+	boolean getSelectButton(){
+		return xbox.getRawButton(7);
+	}
+	boolean getStartButton(){
+		return xbox.getRawButton(8);
+	}
 }
