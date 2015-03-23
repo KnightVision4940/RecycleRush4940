@@ -9,7 +9,7 @@ public class Robot extends IterativeRobot {
 	 * Change the value of the below variable in order to select the desired auto code
 	 * Please refer to the Autonomous mode directory
 	 */
-	final int AUTONOMOUS_MODE = 3;
+	final int AUTONOMOUS_MODE = 7;
 	
 	
 	//SUBSYSTEMS / CLASSES
@@ -251,10 +251,6 @@ public class Robot extends IterativeRobot {
     		//stops turning
     		mecanum.turn(FNULL);
     	}
-
-
-
-
     	else if (AUTONOMOUS_MODE == 6){
     		//tightens the grippers
     		gripper.set(-1);
@@ -331,6 +327,58 @@ public class Robot extends IterativeRobot {
     			if (!tallElev.getLowerLimit()) tallElev.set(0.3);
     			else tallElev.set(-OFFSET);
     		} while(shortElev.getLowerLimit() || tallElev.getLowerLimit());
+    	}
+    	/**
+    	 * AUTONOMOUS MODE 7
+    	 * picks up our recyling bin from behind
+    	 * strafes right
+    	 * rotates 90 degrees clockwise
+    	 * strafes right
+    	 * drives forward
+    	 * picks up tote
+    	 * rotates 90 degrees clockwise
+    	 * drives into auto zone
+    	 * drops tote/bin
+    	 */
+    	else if(AUTONOMOUS_MODE == 7){
+    		gripper.set(-1);
+    		Timer.delay(3);
+    		tallElev.set(-0.4);
+    		Timer.delay(1);
+    		tallElev.set(-OFFSET);
+    		gripper.set(0);
+    		mecanum.drive((float)0.5, 90, FNULL, false);
+    		Timer.delay(0.4);
+    		mecanum.drive(FNULL, FNULL, FNULL, false);
+    		mecanum.drive((float)0.5, 180, FNULL, false);
+    		mecanum.drive(FNULL, FNULL, FNULL, false);
+    		mecanum.turn(0.5);
+    		Timer.delay(0.5);
+    		mecanum.turn(NULL);
+    		mecanum.drive((float)0.5, 180, FNULL, false);
+    		Timer.delay(1);
+    		shortElev.set(-1);
+    		Timer.delay(2);
+    		shortElev.set(1);
+    		Timer.delay(2);
+    		mecanum.turn(0.5);
+    		Timer.delay(0.5);
+    		mecanum.turn(NULL);
+    		mecanum.drive((float)0.5, 180, FNULL, false);
+    		gripper.set(1);
+    		Timer.delay(3);
+    		mecanum.drive(FNULL, FNULL, FNULL, false);
+    		mecanum.turn(0.5);
+    		Timer.delay(0.5);
+    		mecanum.turn(NULL);
+    		shortElev.set(-1);
+    		tallElev.set(0.2);
+    		Timer.delay(1);
+    		tallElev.set(-OFFSET);
+    		Timer.delay(0.5);
+    		gripper.set(0);
+    		Timer.delay(0.5);
+    		shortElev.set(0);
     	}
     }
 
