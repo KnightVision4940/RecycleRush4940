@@ -38,10 +38,10 @@ public class Mecanum
     }
     
     public void init(int joystickNumber, int gyroPin) {   
-        frontLeftWheel = drivetrain.LFront;
-        frontRightWheel = drivetrain.RFront;
-        backLeftWheel = drivetrain.LBack;
-        backRightWheel = drivetrain.RBack;
+        frontLeftWheel = new Talon(3);
+        frontRightWheel = new Talon(0);
+        backLeftWheel = new Talon(2);
+        backRightWheel = new Talon(1);
         
         joystick = new Joystick(joystickNumber);
         
@@ -158,10 +158,14 @@ public class Mecanum
             backRightWheel.set(desiredSpeed*backRight/scaleFactor);
     }
     
-    public void turn(float speed){
+    public void turn(double speed){
         frontLeftWheel.set(speed);
         frontRightWheel.set(speed);
         backLeftWheel.set(speed);
         backRightWheel.set(speed);
+    }
+    
+    public void breakDrive(){
+    	drive((float)0.0, (float)0.0, (float)0.0, false);
     }
 }

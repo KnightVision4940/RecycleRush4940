@@ -21,7 +21,11 @@ public class Elevator {
 	public boolean getLowerLimit(){
 		return lowerLimit.get();
 	}
-	public boolean getMidTote(){
+	public boolean getToteLimit(){
 		return midTote.get();
 	}
+	/* 
+	 * Poop
+	*/
+	
 }

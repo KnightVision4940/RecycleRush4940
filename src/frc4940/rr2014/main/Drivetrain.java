@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.Talon;
 
 
 public class Drivetrain {
+	/*
 	public Talon RFront = new Talon(0);
 	public Talon RBack = new Talon(1); 
 	public Talon LBack = new Talon(2);
@@ -21,4 +22,5 @@ public class Drivetrain {
 	void setLFront(double speed){
 		LFront.set(speed);
 	}			
+	*/
 }

@@ -13,11 +13,15 @@ public class Gripper {
 	//LIMIT SWITCHES
 	DigitalInput openLimit = new DigitalInput(4);
 	DigitalInput closedLimit = new DigitalInput(5);
+	DigitalInput toteLimit = new DigitalInput(7);
 	
 	public boolean getOpenLimit(){
 		return openLimit.get();
 	}
 	public boolean getClosedLimit(){
 		return closedLimit.get();
+	}
+	public boolean getToteLimit(){
+		return toteLimit.get();
 	}
 }
