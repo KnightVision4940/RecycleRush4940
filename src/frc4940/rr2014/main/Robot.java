@@ -330,6 +330,13 @@ public class Robot extends IterativeRobot {
     	}
     	/**
     	 * AUTONOMOUS MODE 7
+    	 * 
+    	 * STARTS FROM BEHIND THE RECYLING BIN;
+    	 * THE GRIPPER IS FACING CENTER FIELD
+    	 * THE TALL ELEVATOR STARTS AT THE BOTTOM OF THE CHASSIS
+    	 * GRIPPERS ARE FULLY OPEN
+    	 * THE SHORT ELEV STARTS SLIGHTLY ABOVE THE TOTE HEIGHT
+    	 * 
     	 * picks up our recyling bin from behind
     	 * strafes right
     	 * rotates 90 degrees clockwise
@@ -339,45 +346,79 @@ public class Robot extends IterativeRobot {
     	 * rotates 90 degrees clockwise
     	 * drives into auto zone
     	 * drops tote/bin
+    	 * 
+    	 * **As of now, the timer delays say it will last 15.25 seconds
+    	 * **Try to find if you can shave that time off anywhere
     	 */
     	else if(AUTONOMOUS_MODE == 7){
+    		//closes grippers
     		gripper.set(-1);
+    		//waits 3 seconds
     		Timer.delay(3);
+    		//raises tall elev
     		tallElev.set(-0.4);
+    		//waits 1 second
     		Timer.delay(1);
+    		//Stops elev and grippers
     		tallElev.set(-OFFSET);
     		gripper.set(0);
+    		//Strafes to the right
     		mecanum.drive((float)0.5, 90, FNULL, false);
     		Timer.delay(0.4);
+    		//Stops
     		mecanum.drive(FNULL, FNULL, FNULL, false);
+    		//drives forwards
     		mecanum.drive((float)0.5, 180, FNULL, false);
+    		Timer.delay(0.35);
+    		//Stops
     		mecanum.drive(FNULL, FNULL, FNULL, false);
+    		//Rotates to face the tote
     		mecanum.turn(0.5);
     		Timer.delay(0.5);
+    		//Stops
     		mecanum.turn(NULL);
+    		//Drives forwards into tote
     		mecanum.drive((float)0.5, 180, FNULL, false);
     		Timer.delay(1);
+    		//Stops
+    		mecanum.drive(FNULL, FNULL, FNULL, false);
+    		//Lowers Short Elevator
     		shortElev.set(-1);
     		Timer.delay(2);
+    		//Raise Short Elevator back up
     		shortElev.set(1);
     		Timer.delay(2);
+    		//Stops elev
+    		shortElev.set(0);
+    		//Rotates 90 degrees; tote faces center field
     		mecanum.turn(0.5);
     		Timer.delay(0.5);
+    		//Stops
     		mecanum.turn(NULL);
+    		//Drives onto auto zone
     		mecanum.drive((float)0.5, 180, FNULL, false);
+    		//Begins to open gripper 
     		gripper.set(1);
+    		//Waits 3 seconds
     		Timer.delay(3);
+    		//Stops 
     		mecanum.drive(FNULL, FNULL, FNULL, false);
+    		//Rotates parallel to steps
     		mecanum.turn(0.5);
     		Timer.delay(0.5);
+    		//stops
     		mecanum.turn(NULL);
+    		//Lowers elevators
     		shortElev.set(-1);
     		tallElev.set(0.2);
     		Timer.delay(1);
+    		//Stops tall Elev
     		tallElev.set(-OFFSET);
     		Timer.delay(0.5);
+    		//Stops Grippers
     		gripper.set(0);
     		Timer.delay(0.5);
+    		//Stops Short elevator
     		shortElev.set(0);
     	}
     }
