@@ -37,7 +37,7 @@ public class Robot extends IterativeRobot {
     	//inverts right-hand side motors
     	//drive.setInvertedMotor(RobotDrive.MotorType.kFrontRight, true);
         //drive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, true);
-        mecanum.init(0, 0);
+        mecanum.init(1, 0);
     }
     
     public void autonomousInit(){
@@ -152,24 +152,9 @@ public class Robot extends IterativeRobot {
     		//drives forwards
     		mecanum.drive((float)0.5, (float)180, FNULL, false);
     		Timer.delay(0.75);
-    		//begins opening grippers while driving 
-    		gripper.set(1);
     		Timer.delay(0.7);
     		//stops driving
     		mecanum.breakDrive();
-    		Timer.delay(0.2);
-    		///turns 90 degrees to the left; original orintation
-    		mecanum.turn((float) -0.5);
-    		Timer.delay(0.56);
-    		//stops turning
-    		mecanum.turn(FNULL);
-    		do{
-    			tallElev.set(0.35);
-    		} while(tallElev.getLowerLimit());
-    		do{
-    			gripper.set(1);
-    		} while(gripper.getOpenLimit());
-    		gripper.set(NULL);
     	}
     	else if(AUTONOMOUS_MODE == 4){
     		/**
@@ -251,10 +236,6 @@ public class Robot extends IterativeRobot {
     		//stops turning
     		mecanum.turn(FNULL);
     	}
-
-
-
-
     	else if (AUTONOMOUS_MODE == 6){
     		//tightens the grippers
     		gripper.set(-1);
@@ -343,7 +324,8 @@ public class Robot extends IterativeRobot {
     /**
      * This function is called periodically during operator control
      */
-    public void teleopInit(){}
+    public void teleopInit(){
+    }
     
     public void teleopPeriodic() {
     	/**
@@ -401,7 +383,11 @@ public class Robot extends IterativeRobot {
     		shortElev.set(0);
     	
     	//Uses the gripper, Bumpers
-		if(xbox.getLBButton()) gripper.set(-1); //Left Bumper
+		if(xbox.getLBButton()) //Left Bumper
+			if(!gripper.getClosedLimit()) 
+				gripper.set(0);
+			else
+				gripper.set(-1); 
 		
     	else if(xbox.getRBButton()){ //Right Bumper
     		if(!gripper.getOpenLimit()) gripper.set(0);

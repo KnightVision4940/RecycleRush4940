@@ -1,12 +1,13 @@
 package frc4940.rr2014.main;
 import edu.wpi.first.wpilibj.Joystick;
 public class XboxController {
-	Joystick xbox = new Joystick(2);         //Wireless Controller
-	Joystick xbox_movePad = new Joystick(1); //Wired Controller
+	Joystick xbox = new Joystick(0);         //Wireless Controller
+//	Joystick xbox_movePad = new Joystick(1); //Wired Controller
 	
 	/**
 	 * WIRED CONTROLS
 	 */
+	/*
 	//Joysticks
 	double getLeftX_movePad(){
 		return xbox_movePad.getRawAxis(1);
@@ -42,7 +43,7 @@ public class XboxController {
 	boolean getLBButton_movePad(){
     	return xbox_movePad.getRawButton(5);
 	}
-	
+	*/
 	/**
 	 * WIRELESS CONTROLS
 	 */
