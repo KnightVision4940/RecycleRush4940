@@ -45,10 +45,11 @@ public class Robot extends IterativeRobot {
     	 * AUTO MODE 1
     	 * 
     	 * Drives forwards into the auto zone
+    	 * RAMP
     	 */
     	if(AUTONOMOUS_MODE == 1){ 
     		mecanum.drive((float)0.25, 180, FNULL, false);
-    		Timer.delay(1.5);
+    		Timer.delay(3.5);
     		mecanum.drive(FNULL, FNULL, FNULL, false);
     	}
     	/**
@@ -127,6 +128,7 @@ public class Robot extends IterativeRobot {
     		 * 
     		 * Picks up the Recycling bin
     		 * ANd places it in the auto zone
+    		 * RAMO
     		 */
     		//tightens the grippers
     		gripper.set(-1);
@@ -151,8 +153,7 @@ public class Robot extends IterativeRobot {
     		gripper.set(0);
     		//drives forwards
     		mecanum.drive((float)0.5, (float)180, FNULL, false);
-    		Timer.delay(0.75);
-    		Timer.delay(0.7);
+    		Timer.delay(3.5);
     		//stops driving
     		mecanum.breakDrive();
     	}
@@ -313,6 +314,54 @@ public class Robot extends IterativeRobot {
     			else tallElev.set(-OFFSET);
     		} while(shortElev.getLowerLimit() || tallElev.getLowerLimit());
     	}
+    	/**
+    	 * AUTO MODE 7
+    	 * 
+    	 * Drives forwards into the auto zone
+    	 */
+    	if(AUTONOMOUS_MODE == 7){ 
+    		mecanum.drive((float)0.25, 180, FNULL, false);
+    		Timer.delay(3.2);
+    		mecanum.drive(FNULL, FNULL, FNULL, false);
+    	}
+    	else if(AUTONOMOUS_MODE == 8){
+    		//na
+    	}
+    	else if(AUTONOMOUS_MODE == 9){
+    		/**
+    		 * AUTO MODE 9
+    		 * 
+    		 * Picks up the Recycling bin
+    		 * ANd places it in the auto zone
+    		 * NO RAMP
+    		 */
+    		//tightens the grippers
+    		gripper.set(-1);
+    		//raises the tall elevator 
+    		tallElev.set(-0.6);
+    		Timer.delay(0.32);
+    		//stops the tall elevator
+    		tallElev.set(-OFFSET);
+    		//drives forwards
+    		mecanum.drive((float)0.5, 0, FNULL, false);
+    		Timer.delay(0.55);
+    		//breaks
+    		mecanum.breakDrive();
+    		Timer.delay(4.5);
+    		//raises the tall elevator to pick up the recyling bin
+    		tallElev.set(-0.8);
+    		Timer.delay(0.3);
+    		//stops the tall elevator
+    		tallElev.set(-OFFSET);
+    		//stops grippers
+    		Timer.delay(1.2);
+    		gripper.set(0);
+    		//drives forwards
+    		mecanum.drive((float)0.5, (float)180, FNULL, false);
+    		Timer.delay(1.5);
+    		//stops driving
+    		mecanum.breakDrive();
+    	}
     }
 
     /**
@@ -334,18 +383,16 @@ public class Robot extends IterativeRobot {
     	
     	//if trigger is held, rotates. Otherwise, drives/strafes
     	if(!joystick.getTrigger()){
-    		//Standard motion
+    		//REVERSED motion
     		if (!joystick.getThumb()) mecanum.drive(mecanum.getJoystickMagnitude(), angles.oppAngle(mecanum.getJoystickDirection()), 0, false);
-    		//Reversed motion
+    		//REGULAR motion
     		else mecanum.drive(mecanum.getJoystickMagnitude(), mecanum.getJoystickDirection(), 0, false);
     		
-    		if(joystick.getLeftT()) mecanum.turn(-0.3);
-    		else if (joystick.getRightT()) mecanum.turn(0.3);
+    		if(joystick.getLeftT()) mecanum.turn(-0.3); 		//Turn L
+    		else if (joystick.getRightT()) mecanum.turn(0.3);	//Turn R
     	}
     	//Rotation-Only motion
     	else if(joystick.getTrigger()) mecanum.turn(joystick.getYAxis() * 0.5);
-    	
-    	//IF ABOVE DOESNT WORK, MAKE .turn() TAKE FLOATS AGAIN;
     	
     	/**
     	 * ElEVATOR PAD CONTROLS
