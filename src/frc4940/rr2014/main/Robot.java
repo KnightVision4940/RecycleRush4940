@@ -9,14 +9,14 @@ public class Robot extends IterativeRobot {
 	 * Change the value of the below variable in order to select the desired auto code
 	 * Please refer to the Autonomous mode directory
 	 */
-	final int AUTONOMOUS_MODE = 3;
+	final int AUTONOMOUS_MODE = 10;
 	
 	
 	//SUBSYSTEMS / CLASSES
 	XtremePro joystick = new XtremePro();
 	Elevator shortElev = new Elevator();
 	RearElevator tallElev = new RearElevator();
-	Gripper gripper = new Gripper();
+	//Gripper //gripper = new Gripper();
     XboxController xbox = new XboxController();
     Mecanum mecanum = new Mecanum();
     AngleCalc angles = new AngleCalc();
@@ -28,7 +28,7 @@ public class Robot extends IterativeRobot {
 	final float FNULL = (float) 0.0;
 	
 	//OTHER GLOBAL VARIABLES
-	int gripperState = 0; //0 is Bumper Control, 1 is closing to tote, 2 is opening to maximum
+	//int gripperState = 0; //0 is Bumper Control, 1 is closing to tote, 2 is opening to maximum
 	/**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
@@ -49,7 +49,7 @@ public class Robot extends IterativeRobot {
     	 */
     	if(AUTONOMOUS_MODE == 1){ 
     		mecanum.drive((float)0.25, 180, FNULL, false);
-    		Timer.delay(3.5);
+    		Timer.delay(2.5);
     		mecanum.drive(FNULL, FNULL, FNULL, false);
     	}
     	/**
@@ -65,8 +65,8 @@ public class Robot extends IterativeRobot {
     		tallElev.set(0.4);
     		Timer.delay(1);
     		tallElev.set(-OFFSET);
-    		//begins closing gripper
-    		gripper.set(-1);
+    		//begins closing //gripper
+    		//gripper.set(-1);
     		Timer.delay(1.6);
     		//begins raising the tall elevator
         	tallElev.set(-0.6);
@@ -85,8 +85,8 @@ public class Robot extends IterativeRobot {
     		//raises the elevator
     		shortElev.set(1);
     		Timer.delay(1);
-    		//stops the grippers
-    		gripper.set(NULL);
+    		//stops the ////grippers
+    		////gripper.set(NULL);
     		Timer.delay(0.7);
     		//stops the elevator
     		shortElev.set(NULL);
@@ -99,8 +99,8 @@ public class Robot extends IterativeRobot {
     		//drives forwards
     		mecanum.drive((float)0.5, (float)180, FNULL, false);
     		Timer.delay(1);
-    		//begins opening grippers while driving 
-    		gripper.set(1);
+    		//begins opening //grippers while driving 
+    		//gripper.set(1);
     		Timer.delay(0.7);
     		//stops driving
     		mecanum.breakDrive();
@@ -111,8 +111,8 @@ public class Robot extends IterativeRobot {
     		//stops turning
     		mecanum.turn(FNULL);
     		Timer.delay(0.2);
-    		//stops grippers
-    		gripper.set(NULL);
+    		//stops //grippers
+    		//gripper.set(NULL);
     		//lowers both elevators until they reach the lower limits
     		do{
     			if(!shortElev.getLowerLimit()) shortElev.set(-0.6);
@@ -130,30 +130,24 @@ public class Robot extends IterativeRobot {
     		 * ANd places it in the auto zone
     		 * RAMO
     		 */
-    		//tightens the grippers
-    		gripper.set(-1);
-    		//raises the tall elevator 
-    		tallElev.set(-0.6);
-    		Timer.delay(0.32);
-    		//stops the tall elevator
-    		tallElev.set(-OFFSET);
     		//drives forwards
     		mecanum.drive((float)0.5, 0, FNULL, false);
     		Timer.delay(0.55);
     		//breaks
     		mecanum.breakDrive();
-    		Timer.delay(4.5);
+    		//raises the tall elevator 
+    		tallElev.set(-0.6);
+    		Timer.delay(0.32);
+    		//stops the tall elevator
+    		tallElev.set(-OFFSET);
     		//raises the tall elevator to pick up the recyling bin
     		tallElev.set(-0.8);
     		Timer.delay(0.3);
     		//stops the tall elevator
     		tallElev.set(-OFFSET);
-    		//stops grippers
-    		Timer.delay(1.2);
-    		gripper.set(0);
     		//drives forwards
     		mecanum.drive((float)0.5, (float)180, FNULL, false);
-    		Timer.delay(3.5);
+    		Timer.delay(2.5);
     		//stops driving
     		mecanum.breakDrive();
     	}
@@ -202,44 +196,21 @@ public class Robot extends IterativeRobot {
     		 * AUTO MODE 5
     		 * 
     		 * Picks up the Tote
-    		 * ANd places it in the auto zone
     		 */
-    		//drives forwards
-    		mecanum.drive((float)0.5, 0, FNULL, false);
-    		Timer.delay(0.55);
-    		//breaks
-    		mecanum.breakDrive();
-    		//turns
-    		mecanum.turn(0.5);
-    		Timer.delay(0.5);
-    		mecanum.breakDrive();
     		//drives into tote
     		mecanum.drive((float)0.5, 180, FNULL, false);
     		Timer.delay(0.65);
     		mecanum.breakDrive();
     		//lifts totes
+    		shortElev.set(-1);
+    		Timer.delay(2);
     		shortElev.set(1);
     		Timer.delay(3);
     		shortElev.set(0);
-    		//turns
-    		mecanum.turn(-0.5);
-    		Timer.delay(0.5);
-    		mecanum.breakDrive();
-    		//drives forwards
-    		mecanum.drive((float)0.5, (float)180, FNULL, false);
-    		Timer.delay(0.8);
-    		//stops driving
-    		mecanum.breakDrive();
-    		Timer.delay(0.2);
-    		///turns 90 degrees to the left; original orintation
-    		mecanum.turn((float) -0.5);
-    		Timer.delay(0.56);
-    		//stops turning
-    		mecanum.turn(FNULL);
     	}
     	else if (AUTONOMOUS_MODE == 6){
-    		//tightens the grippers
-    		gripper.set(-1);
+    		//tightens the //grippers
+    		//gripper.set(-1);
     		//raises the tall elevator 
     		tallElev.set(-0.6);
     		Timer.delay(0.32);
@@ -256,9 +227,9 @@ public class Robot extends IterativeRobot {
     		Timer.delay(0.3);
     		//stops the tall elevator
     		tallElev.set(-OFFSET);
-    		//stops grippers
+    		//stops //grippers
     		Timer.delay(1.2);
-    		gripper.set(0);
+    		//gripper.set(0);
     		//drives backwards
     		mecanum.drive((float)0.5, 180, FNULL, false);
     		Timer.delay(0.55);
@@ -294,8 +265,8 @@ public class Robot extends IterativeRobot {
     		Timer.delay(0.8);
     		//stops driving
     		mecanum.breakDrive();
-    		//begins to open grippers
-    		gripper.set(1);
+    		//begins to open //grippers
+    		//gripper.set(1);
     		Timer.delay(2.2);
     		///turns 90 degrees to the left; original orintation
     		mecanum.turn((float) -0.5);
@@ -303,8 +274,8 @@ public class Robot extends IterativeRobot {
     		//stops turning
     		mecanum.turn(FNULL);
     		Timer.delay(0.2);
-    		//stops grippers
-    		gripper.set(NULL);
+    		//stops //grippers
+    		//gripper.set(NULL);
     		//lowers both elevators until they reach the lower limits
     		do{
     			if(!shortElev.getLowerLimit()) shortElev.set(-0.6);
@@ -335,11 +306,64 @@ public class Robot extends IterativeRobot {
     		 * ANd places it in the auto zone
     		 * NO RAMP
     		 */
-    		//tightens the grippers
-    		gripper.set(-1);
+    		//drives forwards
+    		mecanum.drive((float)0.5, 0, FNULL, false);
+    		Timer.delay(0.55);
+    		//breaks
+    		mecanum.breakDrive();
     		//raises the tall elevator 
     		tallElev.set(-0.6);
     		Timer.delay(0.32);
+    		//stops the tall elevator
+    		tallElev.set(-OFFSET);
+    		//raises the tall elevator to pick up the recyling bin
+    		tallElev.set(-0.8);
+    		Timer.delay(0.3);
+    		//stops the tall elevator
+    		tallElev.set(-OFFSET);
+    		//drives forwards
+    		mecanum.drive((float)0.5, (float)180, FNULL, false);
+    		Timer.delay(1.5);
+    		//stops driving
+    		mecanum.breakDrive();
+    	}
+    	else if(AUTONOMOUS_MODE == 10){
+    		/**
+    		 * AUTO MODE 10
+    		 * 
+    		 * Picks up the Recycling bin
+    		 * ANd places it in the auto zone
+    		 * STATIC
+    		 */
+    		//drives forwards
+    		mecanum.drive((float)0.5, 0, FNULL, false);
+    		Timer.delay(0.55);
+    		//breaks
+    		mecanum.breakDrive();
+    		//raises the tall elevator 
+    		tallElev.set(-0.6);
+    		Timer.delay(0.32);
+    		//stops the tall elevator
+    		tallElev.set(-OFFSET);
+    		//raises the tall elevator to pick up the recyling bin
+    		tallElev.set(-0.8);
+    		Timer.delay(0.3);
+    		//stops the tall elevator
+    		tallElev.set(-OFFSET);
+    	}
+    	else if(AUTONOMOUS_MODE == 11){
+    		/**
+    		 * AUTO MODE 11
+    		 * 
+    		 * Picks up the Recycling bin
+    		 * ANd places it in the auto zone
+    		 * HIGH ELEV FIX
+    		 */
+    		//tightens the //grippers
+    		//gripper.set(-1);
+    		//raises the tall elevator 
+    		tallElev.set(-0.6);
+    		Timer.delay( 0.35 );
     		//stops the tall elevator
     		tallElev.set(-OFFSET);
     		//drives forwards
@@ -350,15 +374,15 @@ public class Robot extends IterativeRobot {
     		Timer.delay(4.5);
     		//raises the tall elevator to pick up the recyling bin
     		tallElev.set(-0.8);
-    		Timer.delay(0.3);
+    		Timer.delay(0.45);
     		//stops the tall elevator
     		tallElev.set(-OFFSET);
-    		//stops grippers
     		Timer.delay(1.2);
-    		gripper.set(0);
     		//drives forwards
     		mecanum.drive((float)0.5, (float)180, FNULL, false);
     		Timer.delay(1.5);
+    		//gripper.set(0);
+    		Timer.delay(1);
     		//stops driving
     		mecanum.breakDrive();
     	}
@@ -428,7 +452,7 @@ public class Robot extends IterativeRobot {
     	}
     	else 
     		shortElev.set(0);
-    	
+    	/*
     	//Uses the gripper, Bumpers
 		if(xbox.getLBButton()) //Left Bumper
 			if(!gripper.getClosedLimit()) 
@@ -437,11 +461,11 @@ public class Robot extends IterativeRobot {
 				gripper.set(-1); 
 		
     	else if(xbox.getRBButton()){ //Right Bumper
-    		if(!gripper.getOpenLimit()) gripper.set(0);
+    		if(!gripper.getOpenLimit()) //gripper.set(0);
     		else gripper.set(1);
     	}
     	else gripper.set(0);
-		
+		*/
     	//INSERT CODE FOR WHEELS
     	//Stew is God
     }
@@ -454,8 +478,8 @@ public class Robot extends IterativeRobot {
     public void testPeriodic() {
     	
     	/*
-		//tightens the grippers
-		gripper.set(-1);
+		//tightens the //grippers
+		//gripper.set(-1);
 		//raises the tall elevator 
 		tallElev.set(-0.6);
 		Timer.delay(0.42);
@@ -479,9 +503,9 @@ public class Robot extends IterativeRobot {
 		mecanum.drive(FNULL, FNULL, FNULL, false);
 		mecanum.drive((float)0.5, 90, FNULL, false);
 		Timer.delay(1.2);
-		//breaks, stops the grippers
+		//breaks, stops the //grippers
 		mecanum.drive(FNULL, FNULL, FNULL, false);
-		gripper.set(NULL);
+		//gripper.set(NULL);
 		//raises the short elevator, then breaks it
 		shortElev.set(-1);
 		Timer.delay(1.5);
@@ -512,10 +536,10 @@ public class Robot extends IterativeRobot {
 			if (!tallElev.getLowerLimit()) tallElev.set(0.3);
 			else tallElev.set(-OFFSET);
 		} while(shortElev.getLowerLimit() || tallElev.getLowerLimit());
-		//opens gripper for the rest of autonomous
+		//opens //gripper for the rest of autonomous
 		do{
-			gripper.set(1);
-		} while (gripper.getOpenLimit());
+			//gripper.set(1);
+		} while (//gripper.getOpenLimit());
 		*/
     }
     
