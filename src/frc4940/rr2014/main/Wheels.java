@@ -3,11 +3,19 @@ package frc4940.rr2014.main;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Victor;
 
-public class Gripper {
-	Victor Gripper = new Victor(6);
+public class Wheels {
+	Victor Wheels = new Victor(6);
 	
 	void set(double speed){
-		Gripper.set(speed);
+		Wheels.set(speed);
+	}
+	
+	void suck(){
+		Wheels.set(-1);
+	}
+	
+	void blow(){
+		Wheels.set(1);
 	}
 	
 	//LIMIT SWITCHES

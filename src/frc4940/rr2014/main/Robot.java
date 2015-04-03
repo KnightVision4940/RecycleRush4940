@@ -9,14 +9,14 @@ public class Robot extends IterativeRobot {
 	 * Change the value of the below variable in order to select the desired auto code
 	 * Please refer to the Autonomous mode directory
 	 */
-	final int AUTONOMOUS_MODE = 10;
+	final int AUTONOMOUS_MODE = 13;
 	
 	
 	//SUBSYSTEMS / CLASSES
 	XtremePro joystick = new XtremePro();
 	Elevator shortElev = new Elevator();
 	RearElevator tallElev = new RearElevator();
-	//Gripper //gripper = new Gripper();
+	Wheels wheels = new Wheels();
     XboxController xbox = new XboxController();
     Mecanum mecanum = new Mecanum();
     AngleCalc angles = new AngleCalc();
@@ -28,7 +28,7 @@ public class Robot extends IterativeRobot {
 	final float FNULL = (float) 0.0;
 	
 	//OTHER GLOBAL VARIABLES
-	//int gripperState = 0; //0 is Bumper Control, 1 is closing to tote, 2 is opening to maximum
+	boolean isStewGreat = true;
 	/**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
@@ -122,14 +122,14 @@ public class Robot extends IterativeRobot {
     			else tallElev.set(-OFFSET);
     		} while(shortElev.getLowerLimit() || tallElev.getLowerLimit());
     	}
+    	/**
+		 * AUTO MODE 3
+		 * 
+		 * Picks up the Recycling bin
+		 * ANd places it in the auto zone
+		 * RAMP
+		 */
     	else if(AUTONOMOUS_MODE == 3){
-    		/**
-    		 * AUTO MODE 3
-    		 * 
-    		 * Picks up the Recycling bin
-    		 * ANd places it in the auto zone
-    		 * RAMO
-    		 */
     		//drives forwards
     		mecanum.drive((float)0.5, 0, FNULL, false);
     		Timer.delay(0.55);
@@ -151,13 +151,13 @@ public class Robot extends IterativeRobot {
     		//stops driving
     		mecanum.breakDrive();
     	}
+    	/**
+		 * AUTO MODE 4
+		 * 
+		 * Picks up the Tote
+		 * ANd places it in the auto zone
+		 */
     	else if(AUTONOMOUS_MODE == 4){
-    		/**
-    		 * AUTO MODE 4
-    		 * 
-    		 * Picks up the Tote
-    		 * ANd places it in the auto zone
-    		 */
     		//drives forwards
     		mecanum.drive((float)0.5, 0, FNULL, false);
     		Timer.delay(0.55);
@@ -191,12 +191,12 @@ public class Robot extends IterativeRobot {
     		//stops turning
     		mecanum.turn(FNULL);
     	}
+    	/**
+		 * AUTO MODE 5
+		 * 
+		 * Picks up the Tote
+		 */
     	else if(AUTONOMOUS_MODE == 5){
-    		/**
-    		 * AUTO MODE 5
-    		 * 
-    		 * Picks up the Tote
-    		 */
     		//drives into tote
     		mecanum.drive((float)0.5, 180, FNULL, false);
     		Timer.delay(0.65);
@@ -208,6 +208,9 @@ public class Robot extends IterativeRobot {
     		Timer.delay(3);
     		shortElev.set(0);
     	}
+    	/**
+    	 * lol idk what this does
+    	 */
     	else if (AUTONOMOUS_MODE == 6){
     		//tightens the //grippers
     		//gripper.set(-1);
@@ -295,17 +298,22 @@ public class Robot extends IterativeRobot {
     		Timer.delay(3.2);
     		mecanum.drive(FNULL, FNULL, FNULL, false);
     	}
+    	/**
+		 * AUTO MODE 8
+		 * 
+		 * Literally does nothing
+		 */
     	else if(AUTONOMOUS_MODE == 8){
-    		//na
+    		//thank you mr. skeltal
     	}
+    	/**
+		 * AUTO MODE 9
+		 * 
+		 * Picks up the Recycling bin
+		 * ANd places it in the auto zone
+		 * NO RAMP
+		 */
     	else if(AUTONOMOUS_MODE == 9){
-    		/**
-    		 * AUTO MODE 9
-    		 * 
-    		 * Picks up the Recycling bin
-    		 * ANd places it in the auto zone
-    		 * NO RAMP
-    		 */
     		//drives forwards
     		mecanum.drive((float)0.5, 0, FNULL, false);
     		Timer.delay(0.55);
@@ -327,14 +335,14 @@ public class Robot extends IterativeRobot {
     		//stops driving
     		mecanum.breakDrive();
     	}
+    	/**
+		 * AUTO MODE 10
+		 * 
+		 * Picks up the Recycling bin
+		 * ANd places it in the auto zone
+		 * STATIC
+		 */
     	else if(AUTONOMOUS_MODE == 10){
-    		/**
-    		 * AUTO MODE 10
-    		 * 
-    		 * Picks up the Recycling bin
-    		 * ANd places it in the auto zone
-    		 * STATIC
-    		 */
     		//drives forwards
     		mecanum.drive((float)0.5, 0, FNULL, false);
     		Timer.delay(0.55);
@@ -351,14 +359,14 @@ public class Robot extends IterativeRobot {
     		//stops the tall elevator
     		tallElev.set(-OFFSET);
     	}
+    	/**
+		 * AUTO MODE 11
+		 * 
+		 * Picks up the Recycling bin
+		 * ANd places it in the auto zone
+		 * HIGH ELEV FIX
+		 */
     	else if(AUTONOMOUS_MODE == 11){
-    		/**
-    		 * AUTO MODE 11
-    		 * 
-    		 * Picks up the Recycling bin
-    		 * ANd places it in the auto zone
-    		 * HIGH ELEV FIX
-    		 */
     		//tightens the //grippers
     		//gripper.set(-1);
     		//raises the tall elevator 
@@ -386,6 +394,75 @@ public class Robot extends IterativeRobot {
     		//stops driving
     		mecanum.breakDrive();
     	}
+    	/**
+		 * AUTO MODE 12
+		 * 
+		 * Picks up the Recycling bin
+		 * DO NOT USE
+		 * ARCHAIC
+		 */
+    	else if(AUTONOMOUS_MODE == 12){
+    		//drives forwards
+    		mecanum.drive((float)0.5, 0, FNULL, false);
+    		Timer.delay(0.7);
+    		//breaks
+    		mecanum.breakDrive();
+    		//raises the tall elevator to pick up the recyling bin
+    		tallElev.set(-0.8);
+    		Timer.delay(1.1);
+    		//stops the tall elevator
+    		tallElev.set(-OFFSET);
+    	}
+    	/**
+    	 * AUTO MODE 13
+    	 * 
+    	 * Picks up Recyling Bin
+    	 * STATIONARY
+    	 */
+    	else if(AUTONOMOUS_MODE == 13){
+    		//raises the tall elevator to pick up the recyling bin
+    		tallElev.set(-0.8);
+    		Timer.delay(1.1);
+    		//stops the tall elevator
+    		tallElev.set(-OFFSET);
+    	}
+    	/**
+    	 * AUTO MODE 14
+    	 * 
+    	 * Picks up Recyling Bin
+    	 * MOVES INTO ZONE (RAMP)
+    	 */
+    	else if(AUTONOMOUS_MODE == 14){
+    		//raises the tall elevator to pick up the recyling bin
+    		tallElev.set(-0.8);
+    		Timer.delay(1.1);
+    		//stops the tall elevator
+    		tallElev.set(-OFFSET);
+    		//drives forwards
+    		mecanum.drive((float)0.5, 180, FNULL, false);
+    		Timer.delay(2.5);
+    		//breaks
+    		mecanum.breakDrive();
+    	}
+    	/**
+    	 * AUTO MODE 15
+    	 * 
+    	 * Picks up Recyling Bin
+    	 * MOVES INTO ZONE (NO ramp))
+    	 */
+    	else if(AUTONOMOUS_MODE == 15){
+    		//raises the tall elevator to pick up the recyling bin
+    		tallElev.set(-0.8);
+    		Timer.delay(1.1);
+    		//stops the tall elevator
+    		tallElev.set(-OFFSET);
+    		//drives forwards
+    		mecanum.drive((float)0.5, 180, FNULL, false);
+    		Timer.delay(1.5);
+    		//breaks
+    		mecanum.breakDrive();
+    	}
+    	
     }
 
     /**
@@ -452,21 +529,17 @@ public class Robot extends IterativeRobot {
     	}
     	else 
     		shortElev.set(0);
-    	/*
-    	//Uses the gripper, Bumpers
-		if(xbox.getLBButton()) //Left Bumper
-			if(!gripper.getClosedLimit()) 
-				gripper.set(0);
-			else
-				gripper.set(-1); 
-		
-    	else if(xbox.getRBButton()){ //Right Bumper
-    		if(!gripper.getOpenLimit()) //gripper.set(0);
-    		else gripper.set(1);
+    	
+    	//Uses the intake wheel, Bumpers
+    	//SUCK
+		if(xbox.getRBButton()) //Right Bumper
+			wheels.suck();
+		//BLOW
+    	else if(xbox.getLBButton()){ //Left Bumper
+    		wheels.blow();
     	}
-    	else gripper.set(0);
-		*/
-    	//INSERT CODE FOR WHEELS
+
+    	else wheels.set(0);
     	//Stew is God
     }
     	
