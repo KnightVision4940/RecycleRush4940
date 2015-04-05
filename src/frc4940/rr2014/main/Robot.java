@@ -9,7 +9,7 @@ public class Robot extends IterativeRobot {
 	 * Change the value of the below variable in order to select the desired auto code
 	 * Please refer to the Autonomous mode directory
 	 */
-	final int AUTONOMOUS_MODE = 13;
+	final int AUTONOMOUS_MODE = 15;
 	
 	
 	//SUBSYSTEMS / CLASSES
@@ -422,7 +422,7 @@ public class Robot extends IterativeRobot {
     	else if(AUTONOMOUS_MODE == 13){
     		//raises the tall elevator to pick up the recyling bin
     		tallElev.set(-0.8);
-    		Timer.delay(1.1);
+    		Timer.delay(0.85);
     		//stops the tall elevator
     		tallElev.set(-OFFSET);
     	}
