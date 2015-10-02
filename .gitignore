@@ -1,6 +1,10 @@
+#################
+## Eclipse
+#################
+
 *.pydevproject
+.project
 .metadata
-.gradle
 bin/
 tmp/
 *.tmp
@@ -8,11 +12,9 @@ tmp/
 *.swp
 *~.nib
 local.properties
+.classpath
 .settings/
 .loadpath
-
-# Eclipse Core
-.project
 
 # External tool builders
 .externalToolBuilders/
@@ -23,14 +25,15 @@ local.properties
 # CDT-specific
 .cproject
 
-# JDT-specific (Eclipse Java Development Tools)
-.classpath
-
 # PDT-specific
 .buildpath
 
-# sbteclipse plugin
-.target
+############
+## Windows
+############
 
-# TeXlipse plugin
-.texlipse
+# Windows image file caches
+Thumbs.db
+
+# Folder config file
+Desktop.ini
