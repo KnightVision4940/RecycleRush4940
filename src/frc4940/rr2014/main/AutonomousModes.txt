@@ -1,0 +1,13 @@
+AUTONOMOUS MODES
+DIRECTORY
+
+Change the value of 
+	final int AUTONOMOUS_MODE
+in Robot.java in order to select the Autonomous modes
+
+
+--  1  --
+	Drive Forwards 
+	
+--  2  --
+	Pick up both recycling bin and tote at the same time, rotate 90 degrees, drive forwards

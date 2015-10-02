@@ -1,0 +1,18 @@
+Front ELEVATOR
+
+	Lower Limit - 0
+	Upper Limit - 1
+
+Rear Elevator
+
+	Lower Limit - 2
+	Upper Limit - 3
+
+Gripper
+	
+	Open Limit - 4
+	Closed Limit - 5
+
+Lower Box - 6 //normally on
+Upper Box - 7 //normally closed
+Clamped - 8
